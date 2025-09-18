@@ -1,69 +1,163 @@
-# React + TypeScript + Vite
+# Dashboard Skróconych Linków
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Nowoczesny dashboard do zarządzania skróconymi linkami zbudowany w React + TypeScript + TailwindCSS.
 
-Currently, two official plugins are available:
+## 🚀 Funkcjonalności
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 📊 Przegląd
 
-## Expanding the ESLint configuration
+- **Karty statystyk** - wyświetlanie kluczowych metryk (łączna liczba linków, kliknięć, aktywnych linków)
+- **Najnowsze linki** - tabela z ostatnio utworzonymi linkami
+- **Najpopularniejsze linki** - ranking linków według liczby kliknięć
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🔗 Zarządzanie linkami
 
-```js
-export default defineConfig([
-	globalIgnores(['dist']),
-	{
-		files: ['**/*.{ts,tsx}'],
-		extends: [
-			// Other configs...
+- **Tabela linków** z możliwością sortowania
+- **Akcje na linkach** - kopiowanie, przełączanie statusu, usuwanie
+- **Filtrowanie i wyszukiwanie**
 
-			// Remove tseslint.configs.recommended and replace with this
-			tseslint.configs.recommendedTypeChecked,
-			// Alternatively, use this for stricter rules
-			tseslint.configs.strictTypeChecked,
-			// Optionally, add this for stylistic rules
-			tseslint.configs.stylisticTypeChecked,
+### 📈 Analityka
 
-			// Other configs...
-		],
-		languageOptions: {
-			parserOptions: {
-				project: ['./tsconfig.node.json', './tsconfig.app.json'],
-				tsconfigRootDir: import.meta.dirname,
-			},
-			// other options...
-		},
-	},
-]);
+- **Wykresy ruchu** - wizualizacja kliknięć w czasie
+- **Top kraje** - statystyki geograficzne
+- **Źródła ruchu** - analiza referrerów
+- **Podsumowanie** - kluczowe wskaźniki wydajności
+
+## 🛠️ Technologie
+
+- **React 19** - nowoczesny framework UI
+- **TypeScript** - typowanie statyczne
+- **TailwindCSS 4** - utility-first CSS framework
+- **Vite** - szybki bundler i dev server
+
+## 📁 Struktura projektu
+
+```
+src/
+├── components/          # Komponenty React
+│   ├── Dashboard.tsx   # Główny komponent dashboardu
+│   ├── Header.tsx      # Nagłówek z nawigacją
+│   ├── StatsCards.tsx  # Karty ze statystykami
+│   ├── LinksTable.tsx  # Tabela linków
+│   └── Charts.tsx      # Komponenty wykresów
+├── data/               # Mockowane dane
+│   └── mockData.ts     # Dane testowe
+├── types/             # Definicje TypeScript
+│   └── index.ts       # Interfejsy i typy
+└── App.tsx            # Główny komponent aplikacji
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎨 Design System
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### Kolory
 
-export default defineConfig([
-	globalIgnores(['dist']),
-	{
-		files: ['**/*.{ts,tsx}'],
-		extends: [
-			// Other configs...
-			// Enable lint rules for React
-			reactX.configs['recommended-typescript'],
-			// Enable lint rules for React DOM
-			reactDom.configs.recommended,
-		],
-		languageOptions: {
-			parserOptions: {
-				project: ['./tsconfig.node.json', './tsconfig.app.json'],
-				tsconfigRootDir: import.meta.dirname,
-			},
-			// other options...
-		},
-	},
-]);
+- **Primary**: Blue (600/700) - główne akcje
+- **Success**: Green (500/600) - pozytywne wskaźniki
+- **Warning**: Yellow (500/600) - ostrzeżenia
+- **Danger**: Red (500/600) - błędy i usuwanie
+- **Neutral**: Gray (50-900) - tekst i tła
+
+### Komponenty
+
+- **Responsywne** - dostosowane do wszystkich urządzeń
+- **Accessible** - zgodne z WCAG 2.1
+- **Hover effects** - interaktywne elementy
+- **Loading states** - płynne przejścia
+- **Animacje** - fade-in, slide-up, bounce-subtle
+- **Custom scrollbar** - stylizowane paski przewijania
+
+### Style CSS
+
+- **Custom classes** - btn-primary, btn-secondary, btn-danger
+- **Card components** - card, card-header
+- **Status badges** - status-active, status-inactive
+- **Focus styles** - focus-ring dla accessibility
+- **Animations** - keyframes dla płynnych przejść
+
+## 🚀 Uruchomienie
+
+```bash
+# Instalacja zależności
+npm install
+
+# Uruchomienie w trybie deweloperskim
+npm run dev
+
+# Build produkcyjny
+npm run build
+
+# Linting
+npm run lint
+
+# Formatowanie kodu
+npm run format
 ```
+
+## 📱 Responsywność
+
+Dashboard jest w pełni responsywny i dostosowuje się do:
+
+- **Mobile** (< 768px) - pojedyncza kolumna
+- **Tablet** (768px - 1024px) - dwie kolumny
+- **Desktop** (> 1024px) - pełny layout
+
+## ♿ Dostępność
+
+- **Keyboard navigation** - pełna obsługa klawiatury
+- **Screen readers** - aria-labels i semantyczne elementy
+- **Color contrast** - odpowiedni kontrast kolorów
+- **Focus indicators** - widoczne wskaźniki fokusa
+
+## 🔧 Konfiguracja
+
+### TailwindCSS
+
+Projekt używa TailwindCSS 4 z nową składnią:
+
+```css
+@import 'tailwindcss/preflight';
+@import 'tailwindcss/utilities';
+```
+
+### Custom CSS
+
+Dodatkowe style CSS dla:
+
+- **Button components** - btn-primary, btn-secondary, btn-danger
+- **Card layouts** - card, card-header
+- **Status indicators** - status-active, status-inactive
+- **Animations** - fadeIn, slideUp, bounceSubtle
+- **Focus management** - focus-ring dla accessibility
+- **Custom scrollbar** - stylizowane paski przewijania
+
+### TypeScript
+
+Ścisłe typowanie z `verbatimModuleSyntax` dla lepszej kontroli importów.
+
+### ESLint + Prettier
+
+Automatyczne formatowanie i linting kodu.
+
+## 📊 Mockowane dane
+
+Aplikacja używa realistycznych danych testowych:
+
+- **5 skróconych linków** z różnymi metrykami
+- **Statystyki ruchu** z ostatnich 7 dni
+- **Dane geograficzne** i źródła ruchu
+- **Historia kliknięć** z timestampami
+
+## 🎯 Przyszłe rozszerzenia
+
+- [ ] Integracja z API
+- [ ] Autentykacja użytkowników
+- [ ] Eksport danych (CSV/PDF)
+- [ ] Notyfikacje w czasie rzeczywistym
+- [ ] Zaawansowane filtry
+- [ ] Bulk operations
+- [ ] Custom domains
+- [ ] QR codes
+
+## 📄 Licencja
+
+MIT License - projekt edukacyjny.

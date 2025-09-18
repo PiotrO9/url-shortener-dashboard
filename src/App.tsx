@@ -1,9 +1,11 @@
+import Dashboard from './components/Dashboard';
+import { mockDashboardData } from './data/mockData';
 import './App.css';
 
 function App() {
 	return (
-		<div>
-			<h1>test</h1>
+		<div className="App">
+			<Dashboard data={mockDashboardData} />
 		</div>
 	);
 }
