@@ -23,7 +23,6 @@ function Dashboard({ data, onRefresh, isRefreshing }: DashboardProps) {
 	const tabs = [
 		{ id: 'overview', label: 'Przegląd', icon: '📊' },
 		{ id: 'links', label: 'Linki', icon: '🔗' },
-		{ id: 'analytics', label: 'Analityka', icon: '📈' },
 	];
 
 	return (

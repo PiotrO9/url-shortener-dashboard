@@ -4,11 +4,17 @@ const API_BASE_URL = '/api';
 
 export class ApiError extends Error {
 	public status?: number;
+	public type: 'network' | 'server' | 'timeout' | 'not-found' | 'generic';
 
-	constructor(message: string, status?: number) {
+	constructor(
+		message: string,
+		status?: number,
+		type?: 'network' | 'server' | 'timeout' | 'not-found' | 'generic'
+	) {
 		super(message);
 		this.name = 'ApiError';
 		this.status = status;
+		this.type = type || 'generic';
 	}
 }
 
@@ -17,10 +23,30 @@ async function fetchApi<T>(endpoint: string): Promise<T> {
 		const response = await fetch(`${API_BASE_URL}${endpoint}`);
 
 		if (!response.ok) {
-			throw new ApiError(
-				`API request failed: ${response.statusText}`,
-				response.status
-			);
+			let errorType:
+				| 'network'
+				| 'server'
+				| 'timeout'
+				| 'not-found'
+				| 'generic' = 'generic';
+			let errorMessage = `API request failed: ${response.statusText}`;
+
+			// Classify error based on status code
+			if (response.status === 404) {
+				errorType = 'not-found';
+				errorMessage = 'Żądany zasób nie został znaleziony';
+			} else if (response.status >= 500) {
+				errorType = 'server';
+				errorMessage = 'Błąd serwera - spróbuj ponownie później';
+			} else if (response.status === 408) {
+				errorType = 'timeout';
+				errorMessage = 'Przekroczono limit czasu żądania';
+			} else if (response.status >= 400) {
+				errorType = 'generic';
+				errorMessage = 'Błąd żądania - sprawdź dane i spróbuj ponownie';
+			}
+
+			throw new ApiError(errorMessage, response.status, errorType);
 		}
 
 		const data = await response.json();
@@ -29,8 +55,23 @@ async function fetchApi<T>(endpoint: string): Promise<T> {
 		if (error instanceof ApiError) {
 			throw error;
 		}
+
+		// Handle network errors
+		if (
+			error instanceof TypeError &&
+			error.message.includes('Failed to fetch')
+		) {
+			throw new ApiError(
+				'Brak połączenia z serwerem - sprawdź połączenie internetowe',
+				undefined,
+				'network'
+			);
+		}
+
 		throw new ApiError(
-			`Network error: ${error instanceof Error ? error.message : 'Unknown error'}`
+			`Błąd sieci: ${error instanceof Error ? error.message : 'Nieznany błąd'}`,
+			undefined,
+			'network'
 		);
 	}
 }
