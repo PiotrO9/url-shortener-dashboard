@@ -7,9 +7,11 @@ import type { DashboardData } from '../types';
 
 interface DashboardProps {
 	data: DashboardData;
+	onRefresh?: () => void;
+	isRefreshing?: boolean;
 }
 
-function Dashboard({ data }: DashboardProps) {
+function Dashboard({ data, onRefresh, isRefreshing }: DashboardProps) {
 	const [activeTab, setActiveTab] = useState<
 		'overview' | 'links' | 'analytics'
 	>('overview');
@@ -26,7 +28,11 @@ function Dashboard({ data }: DashboardProps) {
 
 	return (
 		<div className="min-h-screen bg-gray-50">
-			<Header title="Dashboard Skróconych Linków" />
+			<Header
+				title="Dashboard Skróconych Linków"
+				onRefresh={onRefresh}
+				isRefreshing={isRefreshing}
+			/>
 
 			<main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 				{/* Navigation Tabs */}

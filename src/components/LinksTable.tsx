@@ -36,6 +36,7 @@ function LinksTable({ links, title = 'Najnowsze linki' }: LinksTableProps) {
 	}
 
 	function truncateUrl(url: string, maxLength: number = 50) {
+		if (!url) return '';
 		if (url.length <= maxLength) return url;
 		return url.substring(0, maxLength) + '...';
 	}
