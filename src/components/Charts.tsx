@@ -23,7 +23,9 @@ function SimpleBarChart({ data, title }: SimpleBarChartProps) {
 
 	return (
 		<div className="card animate-fade-in">
-			<h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+			<h3 className="text-lg font-semibold text-gray-900 mb-4">
+				{title}
+			</h3>
 
 			<div className="space-y-4">
 				{/* Legend */}
@@ -41,7 +43,10 @@ function SimpleBarChart({ data, title }: SimpleBarChartProps) {
 				{/* Chart */}
 				<div className="flex items-end space-x-2 h-64">
 					{data.map((item, index) => (
-						<div key={index} className="flex-1 flex flex-col items-center space-y-2">
+						<div
+							key={index}
+							className="flex-1 flex flex-col items-center space-y-2"
+						>
 							{/* Bars */}
 							<div className="flex items-end space-x-1 h-48 w-full justify-center">
 								{/* Clicks bar */}
@@ -49,7 +54,8 @@ function SimpleBarChart({ data, title }: SimpleBarChartProps) {
 									className="bg-blue-500 rounded-t w-6 transition-all duration-300 hover:bg-blue-600"
 									style={{
 										height: `${(item.clicks / maxClicks) * 100}%`,
-										minHeight: item.clicks > 0 ? '4px' : '0px',
+										minHeight:
+											item.clicks > 0 ? '4px' : '0px',
 									}}
 									title={`${item.clicks} kliknięć`}
 								></div>
@@ -59,7 +65,8 @@ function SimpleBarChart({ data, title }: SimpleBarChartProps) {
 									className="bg-green-500 rounded-t w-6 transition-all duration-300 hover:bg-green-600"
 									style={{
 										height: `${(item.links / maxLinks) * 100}%`,
-										minHeight: item.links > 0 ? '4px' : '0px',
+										minHeight:
+											item.links > 0 ? '4px' : '0px',
 									}}
 									title={`${item.links} nowych linków`}
 								></div>
@@ -98,16 +105,23 @@ function TopCountries({ title }: TopCountriesProps) {
 
 	return (
 		<div className="card animate-fade-in">
-			<h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+			<h3 className="text-lg font-semibold text-gray-900 mb-4">
+				{title}
+			</h3>
 
 			<div className="space-y-3">
 				{countries.map((country, index) => (
-					<div key={index} className="flex items-center justify-between">
+					<div
+						key={index}
+						className="flex items-center justify-between"
+					>
 						<div className="flex items-center space-x-3">
 							<span className="text-sm font-medium text-gray-600 w-6">
 								{index + 1}.
 							</span>
-							<span className="text-sm text-gray-900">{country.name}</span>
+							<span className="text-sm text-gray-900">
+								{country.name}
+							</span>
 						</div>
 						<div className="flex items-center space-x-3">
 							<div className="w-24 bg-gray-200 rounded-full h-2">
@@ -141,16 +155,23 @@ function ReferrerStats({ title }: ReferrerStatsProps) {
 
 	return (
 		<div className="card animate-fade-in">
-			<h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+			<h3 className="text-lg font-semibold text-gray-900 mb-4">
+				{title}
+			</h3>
 
 			<div className="space-y-3">
 				{referrers.map((referrer, index) => (
-					<div key={index} className="flex items-center justify-between">
+					<div
+						key={index}
+						className="flex items-center justify-between"
+					>
 						<div className="flex items-center space-x-3">
 							<span className="text-sm font-medium text-gray-600 w-6">
 								{index + 1}.
 							</span>
-							<span className="text-sm text-gray-900">{referrer.name}</span>
+							<span className="text-sm text-gray-900">
+								{referrer.name}
+							</span>
 						</div>
 						<div className="flex items-center space-x-3">
 							<div className="w-24 bg-gray-200 rounded-full h-2">
@@ -183,30 +204,38 @@ function Charts({ data, title = 'Analiza ruchu' }: ChartsProps) {
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 				<ReferrerStats title="Źródła ruchu" />
 				<div className="card animate-fade-in">
-					<h3 className="text-lg font-semibold text-gray-900 mb-4">Podsumowanie</h3>
+					<h3 className="text-lg font-semibold text-gray-900 mb-4">
+						Podsumowanie
+					</h3>
 					<div className="space-y-3">
 						<div className="flex justify-between items-center">
-							<span className="text-sm text-gray-600">Średnia kliknięć/dzień</span>
+							<span className="text-sm text-gray-600">
+								Średnia kliknięć/dzień
+							</span>
 							<span className="text-sm font-medium text-gray-900">
 								{Math.round(
-									data.reduce((sum, item) => sum + item.clicks, 0) / data.length
+									data.reduce(
+										(sum, item) => sum + item.clicks,
+										0
+									) / data.length
 								)}
 							</span>
 						</div>
 						<div className="flex justify-between items-center">
-							<span className="text-sm text-gray-600">Najlepszy dzień</span>
+							<span className="text-sm text-gray-600">
+								Najlepszy dzień
+							</span>
 							<span className="text-sm font-medium text-gray-900">
 								{formatDate(
 									data.reduce(
-										(max, item) => (item.clicks > max.clicks ? item : max),
+										(max, item) =>
+											item.clicks > max.clicks
+												? item
+												: max,
 										data[0]
 									).date
 								)}
 							</span>
-						</div>
-						<div className="flex justify-between items-center">
-							<span className="text-sm text-gray-600">Łączny wzrost</span>
-							<span className="text-sm font-medium text-green-600">+12.5%</span>
 						</div>
 					</div>
 				</div>
